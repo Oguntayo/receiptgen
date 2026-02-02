@@ -1,0 +1,19 @@
+[02/03/2026 00:23:54] S3 DEBUG: AWS Settings found. Bucket: receiptgen
+[02/03/2026 00:23:54] Starting receipt job for order 25e41fc3-9683-4b9c-9160-d440c60e453b
+[02/03/2026 00:23:56] Sending receipt to twocolorboy@gmail.com
+[02/03/2026 00:23:56] DEFINITIVE DEBUG: Starting S3 Upload for Order 25e41fc3-9683-4b9c-9160-d440c60e453b
+[02/03/2026 00:23:56] S3 DEBUG: Uploading Order_25e41fc3-9683-4b9c-9160-d440c60e453b_20260202232356.pdf to bucket receiptgen
+[02/03/2026 00:24:09] S3 DEBUG: Upload successful. Key: receipts/Order_25e41fc3-9683-4b9c-9160-d440c60e453b_20260202232356.pdf
+[02/03/2026 00:24:09] DEFINITIVE DEBUG: Receipt uploaded to S3: receipts/Order_25e41fc3-9683-4b9c-9160-d440c60e453b_20260202232356.pdf
+[02/03/2026 00:24:09] Receipt job failed: An error occurred while saving the entity changes. See the inner exception for details.
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at ReceiptGen.Services.ReceiptService.SendReceiptJobAsync(Guid orderId)

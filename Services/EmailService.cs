@@ -44,18 +44,18 @@ The ReceiptGen Team"
             };
 
             using var client = new SmtpClient();
-            client.Timeout = 30000; // 30 seconds
+            client.Timeout = 10000; // 10 seconds is usually enough for connection
             try
             {
-                await client.ConnectAsync(emailSettings["Host"], int.Parse(emailSettings["Port"]!), SecureSocketOptions.SslOnConnect);
+                // Auto will try SSL/TLS or STARTTLS based on the port
+                await client.ConnectAsync(emailSettings["Host"], int.Parse(emailSettings["Port"]!), SecureSocketOptions.Auto);
                 await client.AuthenticateAsync(emailSettings["Email"], emailSettings["Password"]);
                 await client.SendAsync(message);
                 await client.DisconnectAsync(true);
             }
             catch (Exception ex)
             {
-                // In a real app, you might want to log this
-                Console.WriteLine($"Error sending email: {ex.Message}");
+                Console.WriteLine($"SMTP Connection Error: {ex.Message}");
                 throw;
             }
         }
@@ -135,19 +135,20 @@ The ReceiptGen Team",
             message.Body = bodyBuilder.ToMessageBody();
 
             using var client = new SmtpClient();
-            client.Timeout = 30000; // 30 seconds
+            client.Timeout = 10000; // 10 seconds is usually enough for connection
             try
             {
-                await client.ConnectAsync(emailSettings["Host"], int.Parse(emailSettings["Port"]!), SecureSocketOptions.SslOnConnect);
+                // Auto will try SSL/TLS or STARTTLS based on the port
+                await client.ConnectAsync(emailSettings["Host"], int.Parse(emailSettings["Port"]!), SecureSocketOptions.Auto);
                 await client.AuthenticateAsync(emailSettings["Email"], emailSettings["Password"]);
                 await client.SendAsync(message);
                 await client.DisconnectAsync(true);
             }
             catch (Exception ex)
             {
-                var logMessage = $"[{DateTime.Now}] Error sending receipt email to {email}: {ex.Message}{Environment.NewLine}{ex.StackTrace}{Environment.NewLine}";
+                var logMessage = $"[{DateTime.Now}] SMTP Connection Error sending to {email}: {ex.Message}{Environment.NewLine}{ex.StackTrace}{Environment.NewLine}";
                 File.AppendAllText("email_logs.txt", logMessage);
-                Console.WriteLine($"Error sending receipt email: {ex.Message}");
+                Console.WriteLine($"SMTP Connection Error: {ex.Message}");
                 throw;
             }
         }

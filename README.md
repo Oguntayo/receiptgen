@@ -107,6 +107,11 @@ In the **Environment** tab of your Render service, add the following keys (copy 
 ### 4. Deploy
 Render will automatically detect the `Dockerfile` in your root or subdirectory (if configured) and start the build.
 
+### 5. Troubleshooting SMTP on Render
+If you experience **Timeouts** during email sending:
+- **Port 587**: Many cloud providers (including Render) may block port 465. Try switching your `EmailSettings__Port` to `587` in the Render environment variables.
+- **Security**: The app automatically detects whether to use SSL/TLS or STARTTLS based on the port.
+
 ---
 
 ## 🛠 Usage Guide
