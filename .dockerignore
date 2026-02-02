@@ -1,0 +1,14 @@
+**/.dockerignore
+**/.git
+**/.gitignore
+**/.vs
+**/.vscode
+**/bin
+**/obj
+**/out
+**/artifacts
+email_logs.txt
+run_output.txt
+run_watch.sh
+appsettings.json
+appsettings.Development.json

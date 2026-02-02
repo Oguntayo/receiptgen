@@ -59,6 +59,54 @@ ReceiptGen is a robust .NET web application designed for small businesses to man
    ```
    The app will be available at `http://localhost:5046` (Default).
 
+### 2. Run with Docker
+
+1. **Build the image:**
+   ```bash
+   docker build -t receiptgen .
+   ```
+
+2. **Run the container:**
+   ```bash
+   docker run -d -p 8080:8080 --name receiptgen -e ConnectionStrings__DefaultConnection="Your_DB_String" receiptgen
+   ```
+   The app will be accessible at `http://localhost:8080`.
+
+---
+
+## 🌐 Deploying to Render
+
+### 1. Repository Access
+Ensure your project is pushed to GitHub (as you've already done).
+
+### 2. Create Web Service
+1. Log in to [Render](https://dashboard.render.com/).
+2. Click **New +** and select **Web Service**.
+3. Connect your GitHub repository (`Oguntayo/receiptgen`).
+4. **Project Settings**:
+   - **Language**: `Docker`
+   - **Region**: Select the one closest to your DB.
+   - **Instance Type**: `Free` or `Starter`.
+
+### 3. Environment Variables
+In the **Environment** tab of your Render service, add the following keys (copy values from your `appsettings.json`):
+- `ConnectionStrings__DefaultConnection`
+- `Jwt__Key`
+- `Jwt__Issuer`
+- `Jwt__Audience`
+- `EmailSettings__Email`
+- `EmailSettings__Password`
+- `EmailSettings__Host`
+- `EmailSettings__Port`
+- `AWS__AccessKey`
+- `AWS__SecretKey`
+- `AWS__Region`
+- `AWS__BucketName`
+- `ASPNETCORE_ENVIRONMENT`: `Production`
+
+### 4. Deploy
+Render will automatically detect the `Dockerfile` in your root or subdirectory (if configured) and start the build.
+
 ---
 
 ## 🛠 Usage Guide

@@ -209,3 +209,4 @@
 [2/2/2026 11:33:05 PM] DEFINITIVE DEBUG: Receipt uploaded to S3: receipts/Order_ff942179-1562-42f1-bfe6-8214b80e6b52_20260202223303.pdf
 [2/2/2026 11:33:09 PM] Receipt sent successfully to twocolorboy@gmail.com
 [2/2/2026 11:33:19 PM] S3 DEBUG: AWS Settings found. Bucket: receiptgen
+[2/2/2026 11:38:25 PM] S3 DEBUG: AWS Settings found. Bucket: receiptgen
