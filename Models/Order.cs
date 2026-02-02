@@ -25,5 +25,8 @@ namespace ReceiptGen.Models
 
         // Navigation property for order items
         public ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
+        
+        // Navigation property for receipt
+        public Receipt? Receipt { get; set; }
     }
 }

@@ -192,3 +192,20 @@
 [2/2/2026 11:18:17 PM] S3 DEBUG: Upload successful. URL: https://receiptgen.s3.us-east-1.amazonaws.com/receipts/Order_772d322d-a811-4409-85f1-f55221fc0dde_20260202221816.pdf
 [2/2/2026 11:18:17 PM] DEFINITIVE DEBUG: Receipt uploaded to S3: https://receiptgen.s3.us-east-1.amazonaws.com/receipts/Order_772d322d-a811-4409-85f1-f55221fc0dde_20260202221816.pdf
 [2/2/2026 11:18:22 PM] Receipt sent successfully to twocolorboy@gmail.com
+[2/2/2026 11:27:43 PM] S3 DEBUG: AWS Settings found. Bucket: receiptgen
+[2/2/2026 11:27:44 PM] Starting receipt job for order f46057fa-730e-47e3-96ec-aa58f916be82
+[2/2/2026 11:27:45 PM] Sending receipt to twocolorboy@gmail.com
+[2/2/2026 11:27:45 PM] DEFINITIVE DEBUG: Starting S3 Upload for Order f46057fa-730e-47e3-96ec-aa58f916be82
+[2/2/2026 11:27:45 PM] S3 DEBUG: Uploading Order_f46057fa-730e-47e3-96ec-aa58f916be82_20260202222745.pdf to bucket receiptgen
+[2/2/2026 11:27:49 PM] S3 DEBUG: Upload successful. URL: https://receiptgen.s3.us-east-1.amazonaws.com/receipts/Order_f46057fa-730e-47e3-96ec-aa58f916be82_20260202222745.pdf
+[2/2/2026 11:27:49 PM] DEFINITIVE DEBUG: Receipt uploaded to S3: https://receiptgen.s3.us-east-1.amazonaws.com/receipts/Order_f46057fa-730e-47e3-96ec-aa58f916be82_20260202222745.pdf
+[2/2/2026 11:27:53 PM] Receipt sent successfully to twocolorboy@gmail.com
+[2/2/2026 11:33:02 PM] S3 DEBUG: AWS Settings found. Bucket: receiptgen
+[2/2/2026 11:33:02 PM] Starting receipt job for order ff942179-1562-42f1-bfe6-8214b80e6b52
+[2/2/2026 11:33:03 PM] Sending receipt to twocolorboy@gmail.com
+[2/2/2026 11:33:03 PM] DEFINITIVE DEBUG: Starting S3 Upload for Order ff942179-1562-42f1-bfe6-8214b80e6b52
+[2/2/2026 11:33:03 PM] S3 DEBUG: Uploading Order_ff942179-1562-42f1-bfe6-8214b80e6b52_20260202223303.pdf to bucket receiptgen
+[2/2/2026 11:33:05 PM] S3 DEBUG: Upload successful. Key: receipts/Order_ff942179-1562-42f1-bfe6-8214b80e6b52_20260202223303.pdf
+[2/2/2026 11:33:05 PM] DEFINITIVE DEBUG: Receipt uploaded to S3: receipts/Order_ff942179-1562-42f1-bfe6-8214b80e6b52_20260202223303.pdf
+[2/2/2026 11:33:09 PM] Receipt sent successfully to twocolorboy@gmail.com
+[2/2/2026 11:33:19 PM] S3 DEBUG: AWS Settings found. Bucket: receiptgen

@@ -141,5 +141,60 @@ namespace ReceiptGen.Controllers
                 return StatusCode(500, $"An error occurred during checkout: {ex.Message}");
             }
         }
+
+        [HttpGet("history")]
+        public async Task<ActionResult<PagedResponse<OrderResponseDto>>> GetOrderHistory([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
+        {
+            var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+            var userRole = User.FindFirstValue(ClaimTypes.Role);
+
+            if (pageNumber < 1) pageNumber = 1;
+            if (pageSize < 1) pageSize = 10;
+            if (pageSize > 50) pageSize = 50;
+
+            IQueryable<Order> query = _context.Orders
+                .Include(o => o.OrderItems)
+                    .ThenInclude(oi => oi.Product)
+                .AsNoTracking();
+
+            if (userRole == UserRole.Business.ToString())
+            {
+                // Business owners see orders for any of their stores
+                query = query.Where(o => o.OrderItems.Any(oi => oi.Product.Store!.OwnerId == userId));
+            }
+            else
+            {
+                // Customers see only their own orders
+                query = query.Where(o => o.UserId == userId);
+            }
+
+            var totalItems = await query.CountAsync();
+            var orders = await query
+                .OrderByDescending(o => o.CreatedAt)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            var orderDtos = orders.Select(order => new OrderResponseDto
+            {
+                Id = order.Id,
+                Subtotal = order.Subtotal,
+                DiscountAmount = order.DiscountAmount,
+                VatAmount = order.VatAmount,
+                TotalAmount = order.TotalAmount,
+                PaymentMethod = order.PaymentMethod,
+                Status = order.Status.ToString(),
+                CreatedAt = order.CreatedAt,
+                Items = order.OrderItems.Select(oi => new OrderItemResponseDto
+                {
+                    ProductId = oi.ProductId,
+                    ProductName = oi.Product?.Name ?? "Unknown",
+                    Quantity = oi.Quantity,
+                    UnitPrice = oi.UnitPrice
+                }).ToList()
+            }).ToList();
+
+            return Ok(new PagedResponse<OrderResponseDto>(orderDtos, totalItems, pageNumber, pageSize));
+        }
     }
 }

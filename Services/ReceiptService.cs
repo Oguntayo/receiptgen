@@ -62,6 +62,15 @@ namespace ReceiptGen.Services
                 var s3Url = await _s3Service.UploadReceiptAsync(pdfContent, fileName);
                 File.AppendAllText("email_logs.txt", $"[{DateTime.Now}] DEFINITIVE DEBUG: Receipt uploaded to S3: {s3Url}{Environment.NewLine}");
 
+                // Persist receipt metadata
+                var receipt = new Receipt
+                {
+                    OrderId = orderId,
+                    S3Url = s3Url
+                };
+                _context.Receipts.Add(receipt);
+                await _context.SaveChangesAsync();
+
                 await _emailService.SendReceiptEmailAsync(order.User.Email, order.User.Username, pdfContent, order);
                 File.AppendAllText("email_logs.txt", $"[{DateTime.Now}] Receipt sent successfully to {order.User.Email}{Environment.NewLine}");
             }

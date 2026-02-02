@@ -14,5 +14,6 @@ namespace ReceiptGen.Data
         public DbSet<Store> Stores { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<Receipt> Receipts { get; set; }
     }
 }
