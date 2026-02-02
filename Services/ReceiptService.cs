@@ -37,6 +37,8 @@ namespace ReceiptGen.Services
                 
                 var order = await _context.Orders
                     .Include(o => o.User)
+                    .Include(o => o.OrderItems)
+                        .ThenInclude(oi => oi.Product)
                     .FirstOrDefaultAsync(o => o.Id == orderId);
 
                 if (order == null)
@@ -60,7 +62,7 @@ namespace ReceiptGen.Services
                 var s3Url = await _s3Service.UploadReceiptAsync(pdfContent, fileName);
                 File.AppendAllText("email_logs.txt", $"[{DateTime.Now}] DEFINITIVE DEBUG: Receipt uploaded to S3: {s3Url}{Environment.NewLine}");
 
-                await _emailService.SendReceiptEmailAsync(order.User.Email, order.User.Username, pdfContent, orderId);
+                await _emailService.SendReceiptEmailAsync(order.User.Email, order.User.Username, pdfContent, order);
                 File.AppendAllText("email_logs.txt", $"[{DateTime.Now}] Receipt sent successfully to {order.User.Email}{Environment.NewLine}");
             }
             catch (Exception ex)

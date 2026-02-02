@@ -176,3 +176,19 @@
 [2/2/2026 11:11:39 PM] S3 DEBUG: Upload successful. URL: https://receiptgen.s3.us-east-1.amazonaws.com/receipts/Order_9b35ae7b-a812-4e56-a85e-de683fcd86d4_20260202221135.pdf
 [2/2/2026 11:11:39 PM] DEFINITIVE DEBUG: Receipt uploaded to S3: https://receiptgen.s3.us-east-1.amazonaws.com/receipts/Order_9b35ae7b-a812-4e56-a85e-de683fcd86d4_20260202221135.pdf
 [2/2/2026 11:11:45 PM] Receipt sent successfully to twocolorboy@gmail.com
+[2/2/2026 11:17:58 PM] S3 DEBUG: AWS Settings found. Bucket: receiptgen
+[2/2/2026 11:17:58 PM] Starting receipt job for order 76129a0c-62f2-4057-8c24-85f23c9fd559
+[2/2/2026 11:18:00 PM] Sending receipt to twocolorboy@gmail.com
+[2/2/2026 11:18:00 PM] DEFINITIVE DEBUG: Starting S3 Upload for Order 76129a0c-62f2-4057-8c24-85f23c9fd559
+[2/2/2026 11:18:00 PM] S3 DEBUG: Uploading Order_76129a0c-62f2-4057-8c24-85f23c9fd559_20260202221800.pdf to bucket receiptgen
+[2/2/2026 11:18:04 PM] S3 DEBUG: Upload successful. URL: https://receiptgen.s3.us-east-1.amazonaws.com/receipts/Order_76129a0c-62f2-4057-8c24-85f23c9fd559_20260202221800.pdf
+[2/2/2026 11:18:04 PM] DEFINITIVE DEBUG: Receipt uploaded to S3: https://receiptgen.s3.us-east-1.amazonaws.com/receipts/Order_76129a0c-62f2-4057-8c24-85f23c9fd559_20260202221800.pdf
+[2/2/2026 11:18:08 PM] Receipt sent successfully to twocolorboy@gmail.com
+[2/2/2026 11:18:15 PM] S3 DEBUG: AWS Settings found. Bucket: receiptgen
+[2/2/2026 11:18:15 PM] Starting receipt job for order 772d322d-a811-4409-85f1-f55221fc0dde
+[2/2/2026 11:18:16 PM] Sending receipt to twocolorboy@gmail.com
+[2/2/2026 11:18:16 PM] DEFINITIVE DEBUG: Starting S3 Upload for Order 772d322d-a811-4409-85f1-f55221fc0dde
+[2/2/2026 11:18:16 PM] S3 DEBUG: Uploading Order_772d322d-a811-4409-85f1-f55221fc0dde_20260202221816.pdf to bucket receiptgen
+[2/2/2026 11:18:17 PM] S3 DEBUG: Upload successful. URL: https://receiptgen.s3.us-east-1.amazonaws.com/receipts/Order_772d322d-a811-4409-85f1-f55221fc0dde_20260202221816.pdf
+[2/2/2026 11:18:17 PM] DEFINITIVE DEBUG: Receipt uploaded to S3: https://receiptgen.s3.us-east-1.amazonaws.com/receipts/Order_772d322d-a811-4409-85f1-f55221fc0dde_20260202221816.pdf
+[2/2/2026 11:18:22 PM] Receipt sent successfully to twocolorboy@gmail.com
