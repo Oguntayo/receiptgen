@@ -94,11 +94,15 @@ builder.Services.AddScoped<IS3Service, S3Service>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+app.UseSwagger();
+app.UseSwaggerUI(options =>
+{
+    options.SwaggerEndpoint("/swagger/v1/swagger.json", "ReceiptGen API V1");
+    options.RoutePrefix = "swagger"; // Standard
+});
+
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-
     // Automatically apply migrations if they don't exist
     using (var scope = app.Services.CreateScope())
     {
@@ -106,6 +110,10 @@ if (app.Environment.IsDevelopment())
         db.Database.Migrate();
     }
 }
+
+// Redirect root to swagger for easier testing on Render, 
+// or show a simple health message
+app.MapGet("/", () => Results.Redirect("/swagger"));
 
 app.UseHttpsRedirection();
 
