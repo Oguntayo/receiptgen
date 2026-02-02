@@ -1,0 +1,164 @@
+[2/2/2026 6:32:11 PM] Error sending receipt email to twocolorboy@gmail.com: The operation has timed out.
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, Int32 timeout, CancellationToken cancellationToken)
+   at MailKit.MailService.ConnectNetworkAsync(String host, Int32 port, CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpClient.ConnectAsync(String host, Int32 port, SecureSocketOptions options, CancellationToken cancellationToken)
+   at ReceiptGen.Services.EmailService.SendReceiptEmailAsync(String email, String username, Byte[] pdfContent, Guid orderId)
+[2/2/2026 6:32:11 PM] Receipt job failed: The operation has timed out.
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, Int32 timeout, CancellationToken cancellationToken)
+   at MailKit.MailService.ConnectNetworkAsync(String host, Int32 port, CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpClient.ConnectAsync(String host, Int32 port, SecureSocketOptions options, CancellationToken cancellationToken)
+   at ReceiptGen.Services.EmailService.SendReceiptEmailAsync(String email, String username, Byte[] pdfContent, Guid orderId)
+   at ReceiptGen.Services.ReceiptService.SendReceiptJobAsync(Guid orderId)
+[2/2/2026 6:33:16 PM] Starting receipt job for order f9ba7be2-59ce-49be-9614-39d4b2caef9b
+[2/2/2026 6:33:16 PM] Sending receipt to twocolorboy@gmail.com
+[2/2/2026 6:37:27 PM] Starting receipt job for order 2ff9c23f-c44e-48ec-b775-4e57b6b28b03
+[2/2/2026 6:37:29 PM] Sending receipt to twocolorboy@gmail.com
+[2/2/2026 6:37:39 PM] Error sending receipt email to twocolorboy@gmail.com: The SMTP server has unexpectedly disconnected.
+   at MailKit.Net.Smtp.SmtpStream.ReadAheadAsync(CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpStream.ReadResponseAsync(CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpClient.PostConnectAsync(Stream stream, String host, Int32 port, SecureSocketOptions options, Boolean starttls, CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpClient.ConnectAsync(String host, Int32 port, SecureSocketOptions options, CancellationToken cancellationToken)
+   at ReceiptGen.Services.EmailService.SendReceiptEmailAsync(String email, String username, Byte[] pdfContent, Guid orderId) in /home/oh/internship_2026/ecommerce/ReceiptGen/Services/EmailService.cs:line 93
+[2/2/2026 6:37:39 PM] Receipt job failed: The SMTP server has unexpectedly disconnected.
+   at MailKit.Net.Smtp.SmtpStream.ReadAheadAsync(CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpStream.ReadResponseAsync(CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpClient.PostConnectAsync(Stream stream, String host, Int32 port, SecureSocketOptions options, Boolean starttls, CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpClient.ConnectAsync(String host, Int32 port, SecureSocketOptions options, CancellationToken cancellationToken)
+   at ReceiptGen.Services.EmailService.SendReceiptEmailAsync(String email, String username, Byte[] pdfContent, Guid orderId) in /home/oh/internship_2026/ecommerce/ReceiptGen/Services/EmailService.cs:line 93
+   at ReceiptGen.Services.ReceiptService.SendReceiptJobAsync(Guid orderId) in /home/oh/internship_2026/ecommerce/ReceiptGen/Services/ReceiptService.cs:line 53
+[2/2/2026 6:38:38 PM] Starting receipt job for order 2ff9c23f-c44e-48ec-b775-4e57b6b28b03
+[2/2/2026 6:38:39 PM] Sending receipt to twocolorboy@gmail.com
+[2/2/2026 6:38:49 PM] Error sending receipt email to twocolorboy@gmail.com: The SMTP server has unexpectedly disconnected.
+   at MailKit.Net.Smtp.SmtpStream.ReadAheadAsync(CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpStream.ReadResponseAsync(CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpClient.PostConnectAsync(Stream stream, String host, Int32 port, SecureSocketOptions options, Boolean starttls, CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpClient.ConnectAsync(String host, Int32 port, SecureSocketOptions options, CancellationToken cancellationToken)
+   at ReceiptGen.Services.EmailService.SendReceiptEmailAsync(String email, String username, Byte[] pdfContent, Guid orderId) in /home/oh/internship_2026/ecommerce/ReceiptGen/Services/EmailService.cs:line 93
+[2/2/2026 6:38:49 PM] Receipt job failed: The SMTP server has unexpectedly disconnected.
+   at MailKit.Net.Smtp.SmtpStream.ReadAheadAsync(CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpStream.ReadResponseAsync(CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpClient.PostConnectAsync(Stream stream, String host, Int32 port, SecureSocketOptions options, Boolean starttls, CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpClient.ConnectAsync(String host, Int32 port, SecureSocketOptions options, CancellationToken cancellationToken)
+   at ReceiptGen.Services.EmailService.SendReceiptEmailAsync(String email, String username, Byte[] pdfContent, Guid orderId) in /home/oh/internship_2026/ecommerce/ReceiptGen/Services/EmailService.cs:line 93
+   at ReceiptGen.Services.ReceiptService.SendReceiptJobAsync(Guid orderId) in /home/oh/internship_2026/ecommerce/ReceiptGen/Services/ReceiptService.cs:line 53
+[2/2/2026 6:40:01 PM] Starting receipt job for order 2ff9c23f-c44e-48ec-b775-4e57b6b28b03
+[2/2/2026 6:40:01 PM] Sending receipt to twocolorboy@gmail.com
+[2/2/2026 6:41:36 PM] Starting receipt job for order 89569cd1-13be-4d4f-b610-27ec767a0293
+[2/2/2026 6:41:36 PM] Sending receipt to twocolorboy@gmail.com
+[2/2/2026 6:42:01 PM] Error sending receipt email to twocolorboy@gmail.com: The operation has timed out.
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, Int32 timeout, CancellationToken cancellationToken)
+   at MailKit.MailService.ConnectNetworkAsync(String host, Int32 port, CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpClient.ConnectAsync(String host, Int32 port, SecureSocketOptions options, CancellationToken cancellationToken)
+   at ReceiptGen.Services.EmailService.SendReceiptEmailAsync(String email, String username, Byte[] pdfContent, Guid orderId) in /home/oh/internship_2026/ecommerce/ReceiptGen/Services/EmailService.cs:line 93
+[2/2/2026 6:42:01 PM] Receipt job failed: The operation has timed out.
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, Int32 timeout, CancellationToken cancellationToken)
+   at MailKit.MailService.ConnectNetworkAsync(String host, Int32 port, CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpClient.ConnectAsync(String host, Int32 port, SecureSocketOptions options, CancellationToken cancellationToken)
+   at ReceiptGen.Services.EmailService.SendReceiptEmailAsync(String email, String username, Byte[] pdfContent, Guid orderId) in /home/oh/internship_2026/ecommerce/ReceiptGen/Services/EmailService.cs:line 93
+   at ReceiptGen.Services.ReceiptService.SendReceiptJobAsync(Guid orderId) in /home/oh/internship_2026/ecommerce/ReceiptGen/Services/ReceiptService.cs:line 53
+[2/2/2026 6:43:34 PM] Starting receipt job for order 2ff9c23f-c44e-48ec-b775-4e57b6b28b03
+[2/2/2026 6:43:34 PM] Sending receipt to twocolorboy@gmail.com
+[2/2/2026 6:43:36 PM] Error sending receipt email to twocolorboy@gmail.com: The operation has timed out.
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, Int32 timeout, CancellationToken cancellationToken)
+   at MailKit.MailService.ConnectNetworkAsync(String host, Int32 port, CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpClient.ConnectAsync(String host, Int32 port, SecureSocketOptions options, CancellationToken cancellationToken)
+   at ReceiptGen.Services.EmailService.SendReceiptEmailAsync(String email, String username, Byte[] pdfContent, Guid orderId)
+[2/2/2026 6:43:36 PM] Receipt job failed: The operation has timed out.
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, Int32 timeout, CancellationToken cancellationToken)
+   at MailKit.MailService.ConnectNetworkAsync(String host, Int32 port, CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpClient.ConnectAsync(String host, Int32 port, SecureSocketOptions options, CancellationToken cancellationToken)
+   at ReceiptGen.Services.EmailService.SendReceiptEmailAsync(String email, String username, Byte[] pdfContent, Guid orderId)
+   at ReceiptGen.Services.ReceiptService.SendReceiptJobAsync(Guid orderId)
+[2/2/2026 6:43:38 PM] Receipt sent successfully to twocolorboy@gmail.com
+[2/2/2026 6:44:10 PM] Starting receipt job for order 89569cd1-13be-4d4f-b610-27ec767a0293
+[2/2/2026 6:44:10 PM] Sending receipt to twocolorboy@gmail.com
+[2/2/2026 6:44:13 PM] Receipt sent successfully to twocolorboy@gmail.com
+[2/2/2026 6:45:54 PM] Starting receipt job for order 142a0f7b-5cad-4e9a-b569-8d79f2292572
+[2/2/2026 6:45:56 PM] Sending receipt to twocolorboy@gmail.com
+[2/2/2026 6:45:59 PM] Receipt sent successfully to twocolorboy@gmail.com
+[2/2/2026 6:50:43 PM] Starting receipt job for order e2dce13e-89a8-4f3b-830a-fd0b51a78085
+[2/2/2026 6:50:45 PM] Sending receipt to twocolorboy@gmail.com
+[2/2/2026 6:50:48 PM] Receipt sent successfully to twocolorboy@gmail.com
+[2/2/2026 6:55:11 PM] Starting receipt job for order e76e26f1-bfe9-41fc-9ac1-4d1cc24e097d
+[2/2/2026 6:55:12 PM] Sending receipt to twocolorboy@gmail.com
+[2/2/2026 6:55:25 PM] Error sending receipt email to twocolorboy@gmail.com: The SMTP server has unexpectedly disconnected.
+   at MailKit.Net.Smtp.SmtpStream.ReadAheadAsync(CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpStream.ReadResponseAsync(CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpClient.PostConnectAsync(Stream stream, String host, Int32 port, SecureSocketOptions options, Boolean starttls, CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpClient.ConnectAsync(String host, Int32 port, SecureSocketOptions options, CancellationToken cancellationToken)
+   at ReceiptGen.Services.EmailService.SendReceiptEmailAsync(String email, String username, Byte[] pdfContent, Guid orderId) in /home/oh/internship_2026/ecommerce/ReceiptGen/Services/EmailService.cs:line 95
+[2/2/2026 6:55:25 PM] Receipt job failed: The SMTP server has unexpectedly disconnected.
+   at MailKit.Net.Smtp.SmtpStream.ReadAheadAsync(CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpStream.ReadResponseAsync(CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpClient.PostConnectAsync(Stream stream, String host, Int32 port, SecureSocketOptions options, Boolean starttls, CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpClient.ConnectAsync(String host, Int32 port, SecureSocketOptions options, CancellationToken cancellationToken)
+   at ReceiptGen.Services.EmailService.SendReceiptEmailAsync(String email, String username, Byte[] pdfContent, Guid orderId) in /home/oh/internship_2026/ecommerce/ReceiptGen/Services/EmailService.cs:line 95
+   at ReceiptGen.Services.ReceiptService.SendReceiptJobAsync(Guid orderId) in /home/oh/internship_2026/ecommerce/ReceiptGen/Services/ReceiptService.cs:line 53
+[2/2/2026 6:55:58 PM] Starting receipt job for order e76e26f1-bfe9-41fc-9ac1-4d1cc24e097d
+[2/2/2026 6:55:59 PM] Sending receipt to twocolorboy@gmail.com
+[2/2/2026 6:56:09 PM] Error sending receipt email to twocolorboy@gmail.com: The SMTP server has unexpectedly disconnected.
+   at MailKit.Net.Smtp.SmtpStream.ReadAheadAsync(CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpStream.ReadResponseAsync(CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpClient.PostConnectAsync(Stream stream, String host, Int32 port, SecureSocketOptions options, Boolean starttls, CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpClient.ConnectAsync(String host, Int32 port, SecureSocketOptions options, CancellationToken cancellationToken)
+   at ReceiptGen.Services.EmailService.SendReceiptEmailAsync(String email, String username, Byte[] pdfContent, Guid orderId) in /home/oh/internship_2026/ecommerce/ReceiptGen/Services/EmailService.cs:line 95
+[2/2/2026 6:56:09 PM] Receipt job failed: The SMTP server has unexpectedly disconnected.
+   at MailKit.Net.Smtp.SmtpStream.ReadAheadAsync(CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpStream.ReadResponseAsync(CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpClient.PostConnectAsync(Stream stream, String host, Int32 port, SecureSocketOptions options, Boolean starttls, CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpClient.ConnectAsync(String host, Int32 port, SecureSocketOptions options, CancellationToken cancellationToken)
+   at ReceiptGen.Services.EmailService.SendReceiptEmailAsync(String email, String username, Byte[] pdfContent, Guid orderId) in /home/oh/internship_2026/ecommerce/ReceiptGen/Services/EmailService.cs:line 95
+   at ReceiptGen.Services.ReceiptService.SendReceiptJobAsync(Guid orderId) in /home/oh/internship_2026/ecommerce/ReceiptGen/Services/ReceiptService.cs:line 53
+[2/2/2026 6:56:53 PM] Starting receipt job for order e76e26f1-bfe9-41fc-9ac1-4d1cc24e097d
+[2/2/2026 6:56:54 PM] Sending receipt to twocolorboy@gmail.com
+[2/2/2026 6:58:33 PM] Starting receipt job for order d7c7d7a6-af90-44fb-b45c-1a7f6001c898
+[2/2/2026 6:58:35 PM] Sending receipt to twocolorboy@gmail.com
+[2/2/2026 6:59:05 PM] Error sending receipt email to twocolorboy@gmail.com: The operation has timed out.
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, Int32 timeout, CancellationToken cancellationToken)
+   at MailKit.MailService.ConnectNetworkAsync(String host, Int32 port, CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpClient.ConnectAsync(String host, Int32 port, SecureSocketOptions options, CancellationToken cancellationToken)
+   at ReceiptGen.Services.EmailService.SendReceiptEmailAsync(String email, String username, Byte[] pdfContent, Guid orderId) in /home/oh/internship_2026/ecommerce/ReceiptGen/Services/EmailService.cs:line 95
+[2/2/2026 6:59:05 PM] Receipt job failed: The operation has timed out.
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, Int32 timeout, CancellationToken cancellationToken)
+   at MailKit.MailService.ConnectNetworkAsync(String host, Int32 port, CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpClient.ConnectAsync(String host, Int32 port, SecureSocketOptions options, CancellationToken cancellationToken)
+   at ReceiptGen.Services.EmailService.SendReceiptEmailAsync(String email, String username, Byte[] pdfContent, Guid orderId) in /home/oh/internship_2026/ecommerce/ReceiptGen/Services/EmailService.cs:line 95
+   at ReceiptGen.Services.ReceiptService.SendReceiptJobAsync(Guid orderId) in /home/oh/internship_2026/ecommerce/ReceiptGen/Services/ReceiptService.cs:line 53
+[2/2/2026 6:59:34 PM] Starting receipt job for order d7c7d7a6-af90-44fb-b45c-1a7f6001c898
+[2/2/2026 6:59:35 PM] Sending receipt to twocolorboy@gmail.com
+[2/2/2026 7:00:05 PM] Error sending receipt email to twocolorboy@gmail.com: The operation has timed out.
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, Int32 timeout, CancellationToken cancellationToken)
+   at MailKit.MailService.ConnectNetworkAsync(String host, Int32 port, CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpClient.ConnectAsync(String host, Int32 port, SecureSocketOptions options, CancellationToken cancellationToken)
+   at ReceiptGen.Services.EmailService.SendReceiptEmailAsync(String email, String username, Byte[] pdfContent, Guid orderId) in /home/oh/internship_2026/ecommerce/ReceiptGen/Services/EmailService.cs:line 95
+[2/2/2026 7:00:05 PM] Receipt job failed: The operation has timed out.
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, Int32 timeout, CancellationToken cancellationToken)
+   at MailKit.MailService.ConnectNetworkAsync(String host, Int32 port, CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpClient.ConnectAsync(String host, Int32 port, SecureSocketOptions options, CancellationToken cancellationToken)
+   at ReceiptGen.Services.EmailService.SendReceiptEmailAsync(String email, String username, Byte[] pdfContent, Guid orderId) in /home/oh/internship_2026/ecommerce/ReceiptGen/Services/EmailService.cs:line 95
+   at ReceiptGen.Services.ReceiptService.SendReceiptJobAsync(Guid orderId) in /home/oh/internship_2026/ecommerce/ReceiptGen/Services/ReceiptService.cs:line 53
+[2/2/2026 7:01:03 PM] Starting receipt job for order d7c7d7a6-af90-44fb-b45c-1a7f6001c898
+[2/2/2026 7:01:04 PM] Sending receipt to twocolorboy@gmail.com
+[2/2/2026 7:01:34 PM] Error sending receipt email to twocolorboy@gmail.com: The operation has timed out.
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, Int32 timeout, CancellationToken cancellationToken)
+   at MailKit.MailService.ConnectNetworkAsync(String host, Int32 port, CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpClient.ConnectAsync(String host, Int32 port, SecureSocketOptions options, CancellationToken cancellationToken)
+   at ReceiptGen.Services.EmailService.SendReceiptEmailAsync(String email, String username, Byte[] pdfContent, Guid orderId) in /home/oh/internship_2026/ecommerce/ReceiptGen/Services/EmailService.cs:line 95
+[2/2/2026 7:01:34 PM] Receipt job failed: The operation has timed out.
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, Int32 timeout, CancellationToken cancellationToken)
+   at MailKit.MailService.ConnectNetworkAsync(String host, Int32 port, CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpClient.ConnectAsync(String host, Int32 port, SecureSocketOptions options, CancellationToken cancellationToken)
+   at ReceiptGen.Services.EmailService.SendReceiptEmailAsync(String email, String username, Byte[] pdfContent, Guid orderId) in /home/oh/internship_2026/ecommerce/ReceiptGen/Services/EmailService.cs:line 95
+   at ReceiptGen.Services.ReceiptService.SendReceiptJobAsync(Guid orderId) in /home/oh/internship_2026/ecommerce/ReceiptGen/Services/ReceiptService.cs:line 53
+[2/2/2026 7:03:18 PM] Starting receipt job for order f9ba7be2-59ce-49be-9614-39d4b2caef9b
+[2/2/2026 7:03:18 PM] Sending receipt to twocolorboy@gmail.com
+[2/2/2026 7:03:22 PM] Receipt sent successfully to twocolorboy@gmail.com
+[2/2/2026 7:03:34 PM] Starting receipt job for order 02dd0da9-6387-45f1-a6da-aa9c9a6cb481
+[2/2/2026 7:03:35 PM] Sending receipt to twocolorboy@gmail.com
+[2/2/2026 7:03:38 PM] Receipt sent successfully to twocolorboy@gmail.com
+[2/2/2026 7:03:38 PM] Starting receipt job for order d7c7d7a6-af90-44fb-b45c-1a7f6001c898
+[2/2/2026 7:03:38 PM] Sending receipt to twocolorboy@gmail.com
+[2/2/2026 7:03:42 PM] Receipt sent successfully to twocolorboy@gmail.com
+[2/2/2026 7:03:55 PM] Starting receipt job for order cc664f21-3507-4c95-9ed3-68849fe1179d
+[2/2/2026 7:03:56 PM] Sending receipt to twocolorboy@gmail.com
+[2/2/2026 7:04:00 PM] Receipt sent successfully to twocolorboy@gmail.com

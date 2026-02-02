@@ -4,7 +4,12 @@
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <DefaultItemExcludes>$(DefaultItemExcludes);email_logs.txt;run_output.txt</DefaultItemExcludes>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Watch Include="**\*.cs;**\*.csproj" Exclude="email_logs.txt;run_output.txt" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />

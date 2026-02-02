@@ -9,6 +9,9 @@ using Hangfire;
 using Hangfire.PostgreSql;
 using ReceiptGen.Services;
 
+// Set QuestPDF License
+QuestPDF.Settings.License = QuestPDF.Infrastructure.LicenseType.Community;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -73,12 +76,19 @@ builder.Services.AddHangfire(configuration => configuration
     .SetDataCompatibilityLevel(CompatibilityLevel.Version_180)
     .UseSimpleAssemblyNameTypeSerializer()
     .UseRecommendedSerializerSettings()
-    .UsePostgreSqlStorage(builder.Configuration.GetConnectionString("DefaultConnection")));
+    .UsePostgreSqlStorage(options => 
+    {
+        options.UseNpgsqlConnection(builder.Configuration.GetConnectionString("DefaultConnection"));
+    }));
 
-builder.Services.AddHangfireServer();
+builder.Services.AddHangfireServer(options => 
+{
+    options.WorkerCount = 5;
+});
 
 // Services
 builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddScoped<IReceiptService, ReceiptService>();
 
 var app = builder.Build();
 

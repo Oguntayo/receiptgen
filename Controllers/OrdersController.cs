@@ -3,7 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ReceiptGen.Data;
 using ReceiptGen.Models;
+using ReceiptGen.Services;
 using System.Security.Claims;
+using Hangfire;
 
 namespace ReceiptGen.Controllers
 {
@@ -13,10 +15,12 @@ namespace ReceiptGen.Controllers
     public class OrdersController : ControllerBase
     {
         private readonly AppDbContext _context;
+        private readonly IBackgroundJobClient _backgroundJobClient;
 
-        public OrdersController(AppDbContext context)
+        public OrdersController(AppDbContext context, IBackgroundJobClient backgroundJobClient)
         {
             _context = context;
+            _backgroundJobClient = backgroundJobClient;
         }
 
         [HttpPost("checkout")]
@@ -106,6 +110,9 @@ namespace ReceiptGen.Controllers
 
                 await _context.SaveChangesAsync();
                 await transaction.CommitAsync();
+
+                // Enqueue receipt email job
+                _backgroundJobClient.Enqueue<IReceiptService>(s => s.SendReceiptJobAsync(order.Id));
 
                 var response = new OrderResponseDto
                 {
