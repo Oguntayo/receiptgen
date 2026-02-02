@@ -89,6 +89,7 @@ builder.Services.AddHangfireServer(options =>
 // Services
 builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IReceiptService, ReceiptService>();
+builder.Services.AddScoped<IS3Service, S3Service>();
 
 var app = builder.Build();
 

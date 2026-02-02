@@ -18,11 +18,13 @@ namespace ReceiptGen.Services
     {
         private readonly AppDbContext _context;
         private readonly IEmailService _emailService;
+        private readonly IS3Service _s3Service;
 
-        public ReceiptService(AppDbContext context, IEmailService emailService)
+        public ReceiptService(AppDbContext context, IEmailService emailService, IS3Service s3Service)
         {
             _context = context;
             _emailService = emailService;
+            _s3Service = s3Service;
         }
 
         public async Task SendReceiptJobAsync(Guid orderId)
@@ -50,6 +52,14 @@ namespace ReceiptGen.Services
                 }
 
                 File.AppendAllText("email_logs.txt", $"[{DateTime.Now}] Sending receipt to {order.User.Email}{Environment.NewLine}");
+                
+                File.AppendAllText("email_logs.txt", $"[{DateTime.Now}] DEFINITIVE DEBUG: Starting S3 Upload for Order {orderId}{Environment.NewLine}");
+                
+                // Upload to S3
+                var fileName = $"Order_{orderId}_{DateTime.UtcNow:yyyyMMddHHmmss}.pdf";
+                var s3Url = await _s3Service.UploadReceiptAsync(pdfContent, fileName);
+                File.AppendAllText("email_logs.txt", $"[{DateTime.Now}] DEFINITIVE DEBUG: Receipt uploaded to S3: {s3Url}{Environment.NewLine}");
+
                 await _emailService.SendReceiptEmailAsync(order.User.Email, order.User.Username, pdfContent, orderId);
                 File.AppendAllText("email_logs.txt", $"[{DateTime.Now}] Receipt sent successfully to {order.User.Email}{Environment.NewLine}");
             }

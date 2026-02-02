@@ -162,3 +162,17 @@
 [2/2/2026 7:03:55 PM] Starting receipt job for order cc664f21-3507-4c95-9ed3-68849fe1179d
 [2/2/2026 7:03:56 PM] Sending receipt to twocolorboy@gmail.com
 [2/2/2026 7:04:00 PM] Receipt sent successfully to twocolorboy@gmail.com
+[2/2/2026 8:53:31 PM] Starting receipt job for order e76e26f1-bfe9-41fc-9ac1-4d1cc24e097d
+[2/2/2026 8:53:32 PM] Sending receipt to twocolorboy@gmail.com
+[2/2/2026 8:53:45 PM] Receipt sent successfully to twocolorboy@gmail.com
+[2/2/2026 9:07:34 PM] Starting receipt job for order 9fc17148-aec4-4274-8bfb-3743cf05795a
+[2/2/2026 9:07:35 PM] Sending receipt to twocolorboy@gmail.com
+[2/2/2026 9:07:40 PM] Receipt sent successfully to twocolorboy@gmail.com
+[2/2/2026 11:11:32 PM] S3 DEBUG: AWS Settings found. Bucket: receiptgen
+[2/2/2026 11:11:33 PM] Starting receipt job for order 9b35ae7b-a812-4e56-a85e-de683fcd86d4
+[2/2/2026 11:11:35 PM] Sending receipt to twocolorboy@gmail.com
+[2/2/2026 11:11:35 PM] DEFINITIVE DEBUG: Starting S3 Upload for Order 9b35ae7b-a812-4e56-a85e-de683fcd86d4
+[2/2/2026 11:11:35 PM] S3 DEBUG: Uploading Order_9b35ae7b-a812-4e56-a85e-de683fcd86d4_20260202221135.pdf to bucket receiptgen
+[2/2/2026 11:11:39 PM] S3 DEBUG: Upload successful. URL: https://receiptgen.s3.us-east-1.amazonaws.com/receipts/Order_9b35ae7b-a812-4e56-a85e-de683fcd86d4_20260202221135.pdf
+[2/2/2026 11:11:39 PM] DEFINITIVE DEBUG: Receipt uploaded to S3: https://receiptgen.s3.us-east-1.amazonaws.com/receipts/Order_9b35ae7b-a812-4e56-a85e-de683fcd86d4_20260202221135.pdf
+[2/2/2026 11:11:45 PM] Receipt sent successfully to twocolorboy@gmail.com
