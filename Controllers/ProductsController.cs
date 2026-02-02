@@ -44,6 +44,7 @@ namespace ReceiptGen.Controllers
                     Description = p.Description,
                     Price = p.Price,
                     Stock = p.Stock,
+                    DiscountPercentage = p.DiscountPercentage,
                     StoreId = p.StoreId,
                     CreatedAt = p.CreatedAt
                 })
@@ -69,6 +70,7 @@ namespace ReceiptGen.Controllers
                 Description = product.Description,
                 Price = product.Price,
                 Stock = product.Stock,
+                DiscountPercentage = product.DiscountPercentage,
                 StoreId = product.StoreId,
                 CreatedAt = product.CreatedAt
             };
@@ -94,6 +96,7 @@ namespace ReceiptGen.Controllers
                 Description = productDto.Description,
                 Price = productDto.Price,
                 Stock = productDto.Stock,
+                DiscountPercentage = productDto.DiscountPercentage,
                 StoreId = productDto.StoreId,
                 CreatedAt = DateTime.UtcNow
             };
@@ -108,6 +111,7 @@ namespace ReceiptGen.Controllers
                 Description = product.Description,
                 Price = product.Price,
                 Stock = product.Stock,
+                DiscountPercentage = product.DiscountPercentage,
                 StoreId = product.StoreId,
                 CreatedAt = product.CreatedAt
             };
@@ -131,7 +135,7 @@ namespace ReceiptGen.Controllers
             }
 
             // Verify store ownership
-            if (product.Store.OwnerId != userId)
+            if (product.Store?.OwnerId != userId)
             {
                 return Forbid("You do not own the store this product belongs to.");
             }
@@ -140,6 +144,7 @@ namespace ReceiptGen.Controllers
             product.Description = productDto.Description;
             product.Price = productDto.Price;
             product.Stock = productDto.Stock;
+            product.DiscountPercentage = productDto.DiscountPercentage;
 
             await _context.SaveChangesAsync();
 
@@ -162,7 +167,7 @@ namespace ReceiptGen.Controllers
             }
 
             // Verify store ownership
-            if (product.Store.OwnerId != userId)
+            if (product.Store?.OwnerId != userId)
             {
                 return Forbid("You do not own the store this product belongs to.");
             }
@@ -196,6 +201,7 @@ namespace ReceiptGen.Controllers
                     Description = p.Description,
                     Price = p.Price,
                     Stock = p.Stock,
+                    DiscountPercentage = p.DiscountPercentage,
                     CreatedAt = p.CreatedAt,
                     Store = p.Store == null ? null : new StoreResponseDto
                     {

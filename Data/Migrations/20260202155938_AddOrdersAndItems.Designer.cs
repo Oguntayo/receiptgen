@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using ReceiptGen.Data;
@@ -11,9 +12,11 @@ using ReceiptGen.Data;
 namespace ReceiptGen.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260202155938_AddOrdersAndItems")]
+    partial class AddOrdersAndItems
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,27 +34,14 @@ namespace ReceiptGen.Data.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<decimal>("DiscountAmount")
-                        .HasColumnType("numeric");
-
-                    b.Property<string>("PaymentMethod")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<int>("Status")
                         .HasColumnType("integer");
-
-                    b.Property<decimal>("Subtotal")
-                        .HasColumnType("numeric");
 
                     b.Property<decimal>("TotalAmount")
                         .HasColumnType("numeric");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
-
-                    b.Property<decimal>("VatAmount")
-                        .HasColumnType("numeric");
 
                     b.HasKey("Id");
 
@@ -98,9 +88,6 @@ namespace ReceiptGen.Data.Migrations
 
                     b.Property<string>("Description")
                         .HasColumnType("text");
-
-                    b.Property<decimal>("DiscountPercentage")
-                        .HasColumnType("numeric");
 
                     b.Property<string>("Name")
                         .IsRequired()

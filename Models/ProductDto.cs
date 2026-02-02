@@ -6,6 +6,7 @@ namespace ReceiptGen.Models
         public string? Description { get; set; }
         public decimal Price { get; set; }
         public int Stock { get; set; }
+        public decimal DiscountPercentage { get; set; }
         public Guid StoreId { get; set; }
     }
     public class ProductResponseDto
@@ -15,6 +16,7 @@ namespace ReceiptGen.Models
         public string? Description { get; set; }
         public decimal Price { get; set; }
         public int Stock { get; set; }
+        public decimal DiscountPercentage { get; set; }
         public Guid? StoreId { get; set; }
         public DateTime CreatedAt { get; set; }
     }
@@ -26,6 +28,7 @@ namespace ReceiptGen.Models
         public string? Description { get; set; }
         public decimal Price { get; set; }
         public int Stock { get; set; }
+        public decimal DiscountPercentage { get; set; }
         public DateTime CreatedAt { get; set; }
         public StoreResponseDto? Store { get; set; }
     }
