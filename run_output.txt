@@ -1,0 +1,12 @@
+Using launch settings from /home/oh/internship_2026/ecommerce/ReceiptGen/Properties/launchSettings.json...
+Building...
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://localhost:5044
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /home/oh/internship_2026/ecommerce/ReceiptGen
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
