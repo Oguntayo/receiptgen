@@ -10,5 +10,9 @@ namespace ReceiptGen.Models
         public decimal Price { get; set; }
         public int Stock { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+
+        // Store association
+        public Guid? StoreId { get; set; }
+        public Store? Store { get; set; }
     }
 }
