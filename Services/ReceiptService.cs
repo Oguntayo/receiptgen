@@ -62,14 +62,26 @@ namespace ReceiptGen.Services
                 var s3Url = await _s3Service.UploadReceiptAsync(pdfContent, fileName);
                 File.AppendAllText("email_logs.txt", $"[{DateTime.Now}] DEFINITIVE DEBUG: Receipt uploaded to S3: {s3Url}{Environment.NewLine}");
 
-                // Persist receipt metadata
-                var receipt = new Receipt
+                // Check if receipt already exists for this order (idempotency)
+                var existingReceipt = await _context.Receipts.FirstOrDefaultAsync(r => r.OrderId == orderId);
+                if (existingReceipt != null)
                 {
-                    OrderId = orderId,
-                    S3Url = s3Url
-                };
-                _context.Receipts.Add(receipt);
+                    File.AppendAllText("email_logs.txt", $"[{DateTime.Now}] Receipt already exists for order {orderId}. Updating URL.{Environment.NewLine}");
+                    existingReceipt.S3Url = s3Url;
+                    existingReceipt.CreatedAt = DateTime.UtcNow;
+                }
+                else
+                {
+                    var receipt = new Receipt
+                    {
+                        OrderId = orderId,
+                        S3Url = s3Url
+                    };
+                    _context.Receipts.Add(receipt);
+                }
+                
                 await _context.SaveChangesAsync();
+                File.AppendAllText("email_logs.txt", $"[{DateTime.Now}] Metadata persisted successfully.{Environment.NewLine}");
 
                 await _emailService.SendReceiptEmailAsync(order.User.Email, order.User.Username, pdfContent, order);
                 File.AppendAllText("email_logs.txt", $"[{DateTime.Now}] Receipt sent successfully to {order.User.Email}{Environment.NewLine}");

@@ -44,18 +44,26 @@ The ReceiptGen Team"
             };
 
             using var client = new SmtpClient();
-            client.Timeout = 10000; // 10 seconds is usually enough for connection
+            client.Timeout = 15000; // Increase to 15s
             try
             {
-                // Auto will try SSL/TLS or STARTTLS based on the port
-                await client.ConnectAsync(emailSettings["Host"], int.Parse(emailSettings["Port"]!), SecureSocketOptions.Auto);
+                var host = emailSettings["Host"];
+                var port = int.Parse(emailSettings["Port"]!);
+                
+                // Explicitly set security options based on port
+                // 465 usually uses SslOnConnect, 587 uses StartTls
+                var options = port == 465 ? SecureSocketOptions.SslOnConnect : SecureSocketOptions.StartTls;
+
+                Console.WriteLine($"[SMTP DEBUG] Connecting to {host}:{port} using {options}...");
+                
+                await client.ConnectAsync(host, port, options);
                 await client.AuthenticateAsync(emailSettings["Email"], emailSettings["Password"]);
                 await client.SendAsync(message);
                 await client.DisconnectAsync(true);
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"SMTP Connection Error: {ex.Message}");
+                Console.WriteLine($"[SMTP ERROR] Connection failed: {ex.GetType().Name} - {ex.Message}");
                 throw;
             }
         }
@@ -135,20 +143,30 @@ The ReceiptGen Team",
             message.Body = bodyBuilder.ToMessageBody();
 
             using var client = new SmtpClient();
-            client.Timeout = 10000; // 10 seconds is usually enough for connection
+            client.Timeout = 15000; // Increase to 15s
             try
             {
-                // Auto will try SSL/TLS or STARTTLS based on the port
-                await client.ConnectAsync(emailSettings["Host"], int.Parse(emailSettings["Port"]!), SecureSocketOptions.Auto);
+                var host = emailSettings["Host"];
+                var port = int.Parse(emailSettings["Port"]!);
+                
+                // Explicitly set security options based on port
+                // 465 usually uses SslOnConnect, 587 uses StartTls
+                var options = port == 465 ? SecureSocketOptions.SslOnConnect : SecureSocketOptions.StartTls;
+
+                var debugMessage = $"[{DateTime.Now}] [SMTP DEBUG] Connecting to {host}:{port} using {options}...{Environment.NewLine}";
+                File.AppendAllText("email_logs.txt", debugMessage);
+                Console.WriteLine(debugMessage.Trim());
+                
+                await client.ConnectAsync(host, port, options);
                 await client.AuthenticateAsync(emailSettings["Email"], emailSettings["Password"]);
                 await client.SendAsync(message);
                 await client.DisconnectAsync(true);
             }
             catch (Exception ex)
             {
-                var logMessage = $"[{DateTime.Now}] SMTP Connection Error sending to {email}: {ex.Message}{Environment.NewLine}{ex.StackTrace}{Environment.NewLine}";
+                var logMessage = $"[{DateTime.Now}] [SMTP ERROR] Connection failed for {email}: {ex.GetType().Name} - {ex.Message}{Environment.NewLine}{ex.StackTrace}{Environment.NewLine}";
                 File.AppendAllText("email_logs.txt", logMessage);
-                Console.WriteLine($"SMTP Connection Error: {ex.Message}");
+                Console.WriteLine($"[SMTP ERROR] {ex.Message}");
                 throw;
             }
         }
