@@ -2,6 +2,8 @@
 
 ReceiptGen is a robust .NET web application designed for small businesses to manage stores, products, and automatically generate professional PDF receipts with email delivery and S3 storage.
 
+**Live Demo**: [https://receiptgen-h1z0.onrender.com/swagger](https://receiptgen-h1z0.onrender.com/swagger)
+
 ## Getting Started
 
 ### Prerequisites
@@ -111,6 +113,9 @@ Render will automatically detect the `Dockerfile` in your root or subdirectory (
 If you experience **Timeouts** during email sending:
 - **Port 587**: Many cloud providers (including Render) may block port 465. Try switching your `EmailSettings__Port` to `587` in the Render environment variables.
 - **Security**: The app automatically detects whether to use SSL/TLS or STARTTLS based on the port.
+
+> [!NOTE]
+> **Email Delivery Delay**: Due to background job processing and SMTP provider (Gmail) security checks, it can take **30 minutes to 1 hour** for the receipt email to arrive in your inbox.
 
 ---
 
