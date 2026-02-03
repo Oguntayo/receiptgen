@@ -1,11 +1,11 @@
 using MailKit.Net.Smtp;
 using MailKit.Security;
 using MimeKit;
-using Microsoft.Extensions.Options;
 using ReceiptGen.Models;
+using System.Security.Claims;
+using System.Linq;
 using System;
 using System.IO;
-using System.Linq;
 
 namespace ReceiptGen.Services
 {
@@ -27,7 +27,6 @@ namespace ReceiptGen.Services
         public async Task SendWelcomeEmailAsync(string email, string username)
         {
             var emailSettings = _configuration.GetSection("EmailSettings");
-            
             var message = new MimeMessage();
             message.From.Add(new MailboxAddress("ReceiptGen", emailSettings["Email"]));
             message.To.Add(new MailboxAddress(username, email));
@@ -35,26 +34,25 @@ namespace ReceiptGen.Services
 
             message.Body = new TextPart("plain")
             {
-                Text = $@"Hi {username},
-
-Welcome to ReceiptGen! We're glad to have you on board.
-
-Best regards,
-The ReceiptGen Team"
+                Text = $"Hello {username}, welcome to ReceiptGen! Start managing your stores and generating receipts easily."
             };
 
             using var client = new SmtpClient();
-            client.Timeout = 15000; // Increase to 15s
+            client.Timeout = 20000; // Increase to 20s
+            
+            // IPv6 can cause timeouts in some cloud networks. Forcing IPv4 can help.
+            client.LocalDomain = "localhost";
+            
             try
             {
                 var host = emailSettings["Host"];
                 var port = int.Parse(emailSettings["Port"]!);
-                
-                // Explicitly set security options based on port
-                // 465 usually uses SslOnConnect, 587 uses StartTls
                 var options = port == 465 ? SecureSocketOptions.SslOnConnect : SecureSocketOptions.StartTls;
 
-                Console.WriteLine($"[SMTP DEBUG] Connecting to {host}:{port} using {options}...");
+                Console.WriteLine($"[SMTP DEBUG] Connecting to {host}:{port} ({options}, IPv4 Preferred)...");
+                
+                // Disable certificate revocation check which can also cause timeouts
+                client.CheckCertificateRevocation = false;
                 
                 await client.ConnectAsync(host, port, options);
                 await client.AuthenticateAsync(emailSettings["Email"], emailSettings["Password"]);
@@ -63,99 +61,86 @@ The ReceiptGen Team"
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[SMTP ERROR] Connection failed: {ex.GetType().Name} - {ex.Message}");
+                Console.WriteLine($"[SMTP ERROR] {ex.GetType().Name}: {ex.Message}");
                 throw;
             }
         }
+
         public async Task SendReceiptEmailAsync(string email, string username, byte[] pdfContent, Order order)
         {
             var emailSettings = _configuration.GetSection("EmailSettings");
-            
             var message = new MimeMessage();
             message.From.Add(new MailboxAddress("ReceiptGen", emailSettings["Email"]));
             message.To.Add(new MailboxAddress(username, email));
             message.Subject = $"Your Receipt for Order #{order.Id}";
 
-            var orderItemsHtml = string.Join("", order.OrderItems.Select(item => 
-                $@"<tr>
-                    <td style='padding: 8px; border-bottom: 1px solid #ddd;'>{item.Product?.Name ?? "Unknown"}</td>
-                    <td style='padding: 8px; border-bottom: 1px solid #ddd; text-align: center;'>{item.Quantity}</td>
-                    <td style='padding: 8px; border-bottom: 1px solid #ddd; text-align: right;'>{item.UnitPrice:N2}</td>
-                    <td style='padding: 8px; border-bottom: 1px solid #ddd; text-align: right;'>{(item.UnitPrice * item.Quantity):N2}</td>
-                </tr>"));
-
             var bodyBuilder = new BodyBuilder
             {
-                TextBody = $@"Hi {username},
-
-Thank you for your purchase! 
-
-Order Summary for #{order.Id}:
-{string.Join("\n", order.OrderItems.Select(item => $"- {item.Product?.Name ?? "Unknown"}: {item.Quantity} x {item.UnitPrice:N2} = {(item.UnitPrice * item.Quantity):N2}"))}
-
-Total: {order.TotalAmount:N2}
-
-Please find your full receipt attached to this email.
-
-Best regards,
-The ReceiptGen Team",
                 HtmlBody = $@"
-                <div style='font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #f0f0f0;'>
-                    <h2 style='color: #333;'>Thank you for your purchase!</h2>
-                    <p>Your order <strong>#{order.Id}</strong> has been completed successfully.</p>
-                    
-                    <h3 style='border-bottom: 2px solid #eee; padding-bottom: 10px;'>Order Summary</h3>
+                    <h2>Thank you for your order, {username}!</h2>
+                    <p>Your order #{order.Id} has been successfully processed.</p>
+                    <h3>Order Summary</h3>
                     <table style='width: 100%; border-collapse: collapse;'>
                         <thead>
-                            <tr style='background-color: #f8f8f8;'>
-                                <th style='padding: 8px; text-align: left; border-bottom: 2px solid #ddd;'>Product</th>
-                                <th style='padding: 8px; text-align: center; border-bottom: 2px solid #ddd;'>Qty</th>
-                                <th style='padding: 8px; text-align: right; border-bottom: 2px solid #ddd;'>Price</th>
-                                <th style='padding: 8px; text-align: right; border-bottom: 2px solid #ddd;'>Total</th>
+                            <tr style='background-color: #f2f2f2;'>
+                                <th style='padding: 8px; border: 1px solid #ddd; text-align: left;'>Product</th>
+                                <th style='padding: 8px; border: 1px solid #ddd; text-align: right;'>Quantity</th>
+                                <th style='padding: 8px; border: 1px solid #ddd; text-align: right;'>Unit Price</th>
+                                <th style='padding: 8px; border: 1px solid #ddd; text-align: right;'>Total</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {orderItemsHtml}
+                            {string.Join("", order.OrderItems.Select(item => $@"
+                                <tr>
+                                    <td style='padding: 8px; border: 1px solid #ddd;'>{item.Product?.Name ?? "Unknown Product"}</td>
+                                    <td style='padding: 8px; border: 1px solid #ddd; text-align: right;'>{item.Quantity}</td>
+                                    <td style='padding: 8px; border: 1px solid #ddd; text-align: right;'>{item.UnitPrice:N2}</td>
+                                    <td style='padding: 8px; border: 1px solid #ddd; text-align: right;'>{(item.Quantity * item.UnitPrice):N2}</td>
+                                </tr>"))}
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td colspan='3' style='padding: 8px; text-align: right; font-weight: bold;'>Subtotal</td>
-                                <td style='padding: 8px; text-align: right;'>{order.Subtotal:N2}</td>
+                                <td colspan='3' style='padding: 8px; border: 1px solid #ddd; text-align: right;'><strong>Subtotal</strong></td>
+                                <td style='padding: 8px; border: 1px solid #ddd; text-align: right;'>{order.Subtotal:N2}</td>
                             </tr>
-                            { (order.DiscountAmount > 0 ? $"<tr><td colspan='3' style='padding: 8px; text-align: right; font-weight: bold;'>Discount</td><td style='padding: 8px; text-align: right; color: red;'>-{order.DiscountAmount:N2}</td></tr>" : "" ) }
                             <tr>
-                                <td colspan='3' style='padding: 8px; text-align: right; font-weight: bold;'>VAT</td>
-                                <td style='padding: 8px; text-align: right;'>{order.VatAmount:N2}</td>
+                                <td colspan='3' style='padding: 8px; border: 1px solid #ddd; text-align: right;'><strong>Discount</strong></td>
+                                <td style='padding: 8px; border: 1px solid #ddd; text-align: right;'>-{order.DiscountAmount:N2}</td>
                             </tr>
-                            <tr style='background-color: #eee;'>
-                                <td colspan='3' style='padding: 8px; text-align: right; font-weight: bold;'>Total</td>
-                                <td style='padding: 8px; text-align: right; font-weight: bold;'>{order.TotalAmount:N2}</td>
+                            <tr>
+                                <td colspan='3' style='padding: 8px; border: 1px solid #ddd; text-align: right;'><strong>VAT</strong></td>
+                                <td style='padding: 8px; border: 1px solid #ddd; text-align: right;'>{order.VatAmount:N2}</td>
+                            </tr>
+                            <tr style='background-color: #f9f9f9;'>
+                                <td colspan='3' style='padding: 8px; border: 1px solid #ddd; text-align: right;'><strong>Total</strong></td>
+                                <td style='padding: 8px; border: 1px solid #ddd; text-align: right;'><strong>{order.TotalAmount:N2}</strong></td>
                             </tr>
                         </tfoot>
                     </table>
-
-                    <p style='margin-top: 20px;'>Please find your detailed receipt attached as a PDF.</p>
-                    <p>Best regards,<br><strong>The ReceiptGen Team</strong></p>
-                </div>"
+                    <p>Please find your PDF receipt attached.</p>"
             };
 
-            bodyBuilder.Attachments.Add($"Receipt_{order.Id}.pdf", pdfContent, ContentType.Parse("application/pdf"));
+            bodyBuilder.Attachments.Add($"Receipt_{order.Id}.pdf", pdfContent);
             message.Body = bodyBuilder.ToMessageBody();
 
             using var client = new SmtpClient();
-            client.Timeout = 15000; // Increase to 15s
+            client.Timeout = 20000; // Increase to 20s
+            
+            // IPv6 can cause timeouts in some cloud networks
+            client.LocalDomain = "localhost";
+            
             try
             {
                 var host = emailSettings["Host"];
                 var port = int.Parse(emailSettings["Port"]!);
-                
-                // Explicitly set security options based on port
-                // 465 usually uses SslOnConnect, 587 uses StartTls
                 var options = port == 465 ? SecureSocketOptions.SslOnConnect : SecureSocketOptions.StartTls;
 
-                var debugMessage = $"[{DateTime.Now}] [SMTP DEBUG] Connecting to {host}:{port} using {options}...{Environment.NewLine}";
-                File.AppendAllText("email_logs.txt", debugMessage);
-                Console.WriteLine(debugMessage.Trim());
+                var debugText = $"Connecting to {host}:{port} ({options}, IPv4 Preferred)...";
+                File.AppendAllText("email_logs.txt", $"[{DateTime.Now}] [SMTP DEBUG] {debugText}{Environment.NewLine}");
+                Console.WriteLine($"[SMTP DEBUG] {debugText}");
+                
+                // Disable certificate revocation check which can also cause timeouts
+                client.CheckCertificateRevocation = false;
                 
                 await client.ConnectAsync(host, port, options);
                 await client.AuthenticateAsync(emailSettings["Email"], emailSettings["Password"]);
@@ -164,7 +149,7 @@ The ReceiptGen Team",
             }
             catch (Exception ex)
             {
-                var logMessage = $"[{DateTime.Now}] [SMTP ERROR] Connection failed for {email}: {ex.GetType().Name} - {ex.Message}{Environment.NewLine}{ex.StackTrace}{Environment.NewLine}";
+                var logMessage = $"[{DateTime.Now}] [SMTP ERROR] {ex.GetType().Name} for {email}: {ex.Message}{Environment.NewLine}{ex.StackTrace}{Environment.NewLine}";
                 File.AppendAllText("email_logs.txt", logMessage);
                 Console.WriteLine($"[SMTP ERROR] {ex.Message}");
                 throw;
